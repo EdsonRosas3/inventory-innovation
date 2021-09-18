@@ -1,26 +1,22 @@
-package com.example.marketinnovation.model;
+package com.example.marketinnovation.dto;
 
-import com.example.marketinnovation.dto.ItemInventoryDto;
+import com.example.marketinnovation.model.ItemInventory;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import java.math.BigDecimal;
 
-@Entity
-public class ItemInventory extends ModelBase<ItemInventoryDto> {
+public class ItemInventoryDto extends DtoBase<ItemInventory>{
 
-    @OneToOne
-    private Item item;
+    private ItemDto item;
     private BigDecimal stockQuantity;
     private BigDecimal lowerBoundThreshold;
     private BigDecimal upperBoundThreshold;
     private BigDecimal totalPrice;
 
-    public Item getItem() {
+    public ItemDto getItem() {
         return item;
     }
 
-    public void setItem(Item item) {
+    public void setItem(ItemDto item) {
         this.item = item;
     }
 

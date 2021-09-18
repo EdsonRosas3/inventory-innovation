@@ -2,14 +2,13 @@ package com.example.marketinnovation.dto;
 
 import com.example.marketinnovation.model.ItemInstance;
 
+import java.math.BigDecimal;
+
 public class ItemInstanceDto extends DtoBase<ItemInstance> {
     private ItemDto item;
     private String identifier;// sku
-
     private Boolean featured = Boolean.FALSE;
-
-    // todo generalmente se usa BigDecimal
-    private Double price;
+    private BigDecimal price;
 
 
     public ItemDto getItem() {
@@ -36,11 +35,11 @@ public class ItemInstanceDto extends DtoBase<ItemInstance> {
         this.featured = featured;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

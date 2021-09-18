@@ -1,15 +1,16 @@
 package com.example.marketinnovation.model;
 
+import com.example.marketinnovation.dto.ItemInventoryEntryDto;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 
 @Entity
-public class ItemInventoryEntry extends ModelBase/*<InventoryDto>*/ {
+public class ItemInventoryEntry extends ModelBase<ItemInventoryEntryDto> {
 
     @ManyToOne
     private ItemInventory itemInventory;
-
     private MovementType movementType;
     private BigDecimal quantity; // represent sale or buy instances quantity
     private String itemInstanceSkus; //represents a list of the sku of the involved item instances

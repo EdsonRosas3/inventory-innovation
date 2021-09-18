@@ -11,14 +11,10 @@ public class ItemInstance extends ModelBase<ItemInstanceDto> {
     @OneToOne
     private Item item;
     private String identifier;
-
     private Boolean featured = Boolean.FALSE;
-
-    // todo generalmente se usa BigDecimal
     private BigDecimal price;
-    // todo estados AVAILABLE, SOLD, MAINTENANCE, ON_TRANSPORTATION
     private ItemInstanceStatus itemInstanceState;
-    // todo agregar totalCost
+
 
     private ItemInstanceStatus itemInstanceStatus;
 
