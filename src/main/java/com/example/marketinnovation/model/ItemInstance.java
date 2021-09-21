@@ -5,6 +5,7 @@ import com.example.marketinnovation.dto.ItemInstanceDto;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 public class ItemInstance extends ModelBase<ItemInstanceDto> {
@@ -13,10 +14,16 @@ public class ItemInstance extends ModelBase<ItemInstanceDto> {
     private String identifier;
     private Boolean featured = Boolean.FALSE;
     private BigDecimal price;
-    private ItemInstanceStatus itemInstanceState;
-
-
+    private LocalDate dueDate;
     private ItemInstanceStatus itemInstanceStatus;
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
 
     public Item getItem() {
         return item;
@@ -48,6 +55,14 @@ public class ItemInstance extends ModelBase<ItemInstanceDto> {
 
     public void setFeatured(Boolean featured) {
         this.featured = featured;
+    }
+
+    public ItemInstanceStatus getItemInstanceStatus() {
+        return itemInstanceStatus;
+    }
+
+    public void setItemInstanceStatus(ItemInstanceStatus itemInstanceStatus) {
+        this.itemInstanceStatus = itemInstanceStatus;
     }
 
     /*@Override
