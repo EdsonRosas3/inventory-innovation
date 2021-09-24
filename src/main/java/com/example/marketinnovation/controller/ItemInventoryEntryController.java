@@ -20,7 +20,7 @@ public class ItemInventoryEntryController extends GenericController<ItemInventor
     }
 
     @PostMapping("/buy/{idItemInventory}/{price}/{dueDate}")
-    public ItemInventoryEntry toBoy(@PathVariable Long idItemInventory, @PathVariable BigDecimal price, @PathVariable String dueDate, @RequestBody ItemInventoryEntry itemInventoryEntry){
+    public ItemInventoryEntry toBuy(@PathVariable Long idItemInventory, @PathVariable BigDecimal price, @PathVariable String dueDate, @RequestBody ItemInventoryEntry itemInventoryEntry){
         return itemInventoryEntryService.registerPurchase(idItemInventory,price,LocalDate.parse(dueDate),itemInventoryEntry);
     }
 

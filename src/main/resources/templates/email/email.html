@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Informe</title>
+    <style>
+        .header{
+            width: 100%;
+            background-color: crimson;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .header-color{
+            color: #fff;
+            padding-bottom: 30px;
+            padding-top: 30px;
+            padding-left: 30px;
+        }
+        .paragraph{
+            color: #000;
+            padding-left: 50px;
+        }
+
+    </style>
+</head>
+<body style="margin: 0;padding: 0;">
+    <div class="header">
+        <h2 class="header-color">Informe de stock LIVECRON</h2>
+    </div>
+    <p class="paragraph" th:text="${emailParam.message}"></p>
+    <h3>Cantidad de stock actual: <span th:text="${emailParam.currentStock}"></span></h3>
+    <div class="header">
+        <p class="header-color paragraph">www.livecron.com</p>
+    </div>
+</body>
+</html>

@@ -26,8 +26,8 @@ public class ItemInventoryEntryServiceImpl extends GenericServiceImpl<ItemInvent
 
     public ItemInventoryEntry registerPurchase(Long idItemInventory, BigDecimal price, LocalDate dueDate, ItemInventoryEntry itemInventoryEntry){
         ItemInventory itemInventory = itemInventoryService.findById(idItemInventory);
-        itemInstanceService.saveMany(itemInventory.getItem(),idItemInventory,itemInventoryEntry.getItemInstanceSkus(),price,dueDate);
         if(itemInventory!=null){
+            itemInstanceService.saveMany(itemInventory.getItem(),idItemInventory,itemInventoryEntry.getItemInstanceSkus(),price,dueDate);
             itemInventoryEntry.setItemInventory(itemInventory);
         }
         return  save(itemInventoryEntry);
@@ -38,12 +38,18 @@ public class ItemInventoryEntryServiceImpl extends GenericServiceImpl<ItemInvent
         List<ItemInstance> itemInstances = itemInstanceService.findAllByItemInstanceStatusService(ItemInstanceStatus.AVAILABLE);
         String skus = "";
         BigDecimal amountSell = new BigDecimal(0);
-        for (int i = itemInstances.size()-1 ; i>itemInstances.size()-units.doubleValue()-1 ; i--){
-            ItemInstance itemInstance = itemInstances.get(i);
+        double amountUnits = units.doubleValue();
+        int index = itemInstances.size()-1;
+
+        while (amountUnits>0 && (itemInstances.size()>=amountUnits)){
+            ItemInstance itemInstance = itemInstances.get(index);
             itemInstanceService.changeStatus(itemInstance.getId(),ItemInstanceStatus.SOLD);
             skus+=" "+itemInstance.getIdentifier();
             amountSell.add(itemInstance.getPrice());
+            amountUnits--;
+            index--;
         }
+
         itemInventoryService.subtractStockQuantity(itemInventory.getId(),units);
         itemInventoryService.subtractTotalPrice(itemInventory.getId(),amountSell);
         ItemInventoryEntry itemInventoryEntry = new ItemInventoryEntry();
@@ -51,7 +57,7 @@ public class ItemInventoryEntryServiceImpl extends GenericServiceImpl<ItemInvent
         itemInventoryEntry.setItemInstanceSkus(skus);
         itemInventoryEntry.setQuantity(units);
         itemInventoryEntry.setMovementType(MovementType.SALE);
-        return itemInventoryEntry;
+        return save(itemInventoryEntry);
     }
 
     public ItemInventoryEntry disposeOfProducts(Long idItemInventory){
@@ -98,7 +104,7 @@ public class ItemInventoryEntryServiceImpl extends GenericServiceImpl<ItemInvent
         itemInventoryEntry.setItemInstanceSkus(skus);
         itemInventoryEntry.setQuantity(units);
         itemInventoryEntry.setMovementType(MovementType.REMOVED);
-        return itemInventoryEntry;
+        return save(itemInventoryEntry);
     }
 
     @Override

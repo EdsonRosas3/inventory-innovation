@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class ItemInstanceServiceImpl extends GenericServiceImpl<ItemInstance> implements ItemInstanceService{
@@ -28,7 +29,15 @@ public class ItemInstanceServiceImpl extends GenericServiceImpl<ItemInstance> im
     }
 
     public List<ItemInstance> findAllByItemInstanceStatusService(ItemInstanceStatus status){
-        return findAllByItemInstanceStatusService(status);
+        List<ItemInstance> itemInstances = findAll();
+        List<ItemInstance> itemInstancesAVAILABLE = new ArrayList<ItemInstance>();
+
+        for (ItemInstance itemInstance : itemInstances) {
+            if(itemInstance.getItemInstanceStatus().toString().equals(status.toString())){
+                itemInstancesAVAILABLE.add(itemInstance);
+            }
+        }
+        return itemInstancesAVAILABLE;
     }
     @Override
     protected GenericRepository<ItemInstance> getRepository() {

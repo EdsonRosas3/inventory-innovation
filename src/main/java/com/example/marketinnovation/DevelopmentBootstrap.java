@@ -37,8 +37,8 @@ public class DevelopmentBootstrap implements ApplicationListener<ContextRefreshe
         itemInventory.setItem(item);
         itemInventory.setUpperBoundThreshold(new BigDecimal(10));
         itemInventory.setLowerBoundThreshold(new BigDecimal(3));
-        itemInventory.setStockQuantity(new BigDecimal(4));
-        itemInventory.setTotalPrice(new BigDecimal(20));
+        itemInventory.setStockQuantity(new BigDecimal(7));
+        itemInventory.setTotalPrice(new BigDecimal(35));
         itemInventoryService.save(itemInventory);
     }
     private void persistItemInstances(Item maltinItem) {
@@ -46,10 +46,17 @@ public class DevelopmentBootstrap implements ApplicationListener<ContextRefreshe
         ItemInstance maltinItem2 = createItem(maltinItem, "SKU-77721106006159","2021-10-11",5D);
         ItemInstance maltinItem3 = createItem(maltinItem, "SKU-77721106006160","2021-04-25",5D);
         ItemInstance maltinItem4 = createItem(maltinItem, "SKU-77721106006161","2021-08-30",5D);
+        ItemInstance maltinItem5 = createItem(maltinItem, "SKU-77721106006157","2021-10-11",5D);
+        ItemInstance maltinItem6 = createItem(maltinItem, "SKU-77721106006162","2021-04-25",5D);
+        ItemInstance maltinItem7 = createItem(maltinItem, "SKU-77721106006163","2021-08-30",5D);
         itemInstanceService.save(maltinItem1);
         itemInstanceService.save(maltinItem2);
         itemInstanceService.save(maltinItem3);
         itemInstanceService.save(maltinItem4);
+        itemInstanceService.save(maltinItem5);
+        itemInstanceService.save(maltinItem6);
+        itemInstanceService.save(maltinItem7);
+
     }
 
     private ItemInstance createItem(Item maltinItem, String sku,String dueDate ,double price) {
@@ -59,7 +66,7 @@ public class DevelopmentBootstrap implements ApplicationListener<ContextRefreshe
         itemInstance.setPrice(new BigDecimal(price));
         itemInstance.setDueDate(LocalDate.parse(dueDate));
         itemInstance.setIdentifier(sku);
-        itemInstance.setItemInstanceStatus(ItemInstanceStatus.SCREWED);
+        itemInstance.setItemInstanceStatus(ItemInstanceStatus.AVAILABLE);
         return itemInstance;
     }
 
